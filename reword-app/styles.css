@@ -1,0 +1,114 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #0f172a;
+  color: white;
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.container {
+  width: 100%;
+  max-width: 420px;
+  text-align: center;
+}
+
+/* İlerleme Çubuğu Tasarımı */
+.progress-container {
+    margin-bottom: 30px;
+}
+
+.progress-bar-bg {
+    background: #1e293b;
+    border-radius: 10px;
+    height: 12px;
+    width: 100%;
+    overflow: hidden;
+}
+
+.progress-bar-fill {
+    background: #10b981;
+    width: 0%;
+    height: 100%;
+    border-radius: 10px;
+    transition: width 0.4s ease;
+}
+
+#progressText {
+    color: #94a3b8;
+    display: block;
+    margin-top: 8px;
+    font-size: 14px;
+}
+
+h1 { font-size: 28px; margin-bottom: 30px; }
+h2 { font-size: 42px; margin: 40px 0; color: #6366f1; }
+
+button {
+  width: 100%;
+  padding: 16px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 12px;
+  background: #6366f1;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+}
+
+.buttons {
+  display: flex;
+  gap: 12px;
+}
+
+.btn-know { background: #10b981; }
+.btn-dont-know { background: #ef4444; }
+.btn-next { background: #6366f1; margin-top: 15px; }
+
+#infoBox {
+  margin-top: 25px;
+  background: #1e293b;
+  padding: 20px;
+  border-radius: 16px;
+  text-align: left;
+  border-left: 4px solid #6366f1;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+ul { padding-left: 20px; color: #cbd5e1; }
+li { margin-bottom: 8px; }
+#congratsScreen h1 {
+    margin-top: 10px;
+    font-size: 32px;
+}
+
+#congratsScreen p {
+    font-size: 18px;
+    color: #94a3b8;
+}
+
+/* app.js'deki fadeIn animasyonunu kullanıyoruz (Zaten CSS'inde varsa eklemene gerek yok) */
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+/* Koyu Tema (Varsayılan) */
+body { background: #0f172a; color: white; transition: 0.3s; }
+
+/* Açık Tema */
+body.light-theme { background: #f8fafc; color: #1e293b; }
+body.light-theme .container { background: white; box-shadow: 0 10px 15px rgba(0,0,0,0.1); }
+body.light-theme #statsPanel { background: #f1f5f9; color: #475569; }

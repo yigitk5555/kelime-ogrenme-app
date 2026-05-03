@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gemini Kelime Öğrenme</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="container">
+  <!-- ÜST PANEL: Sadece Tema Butonu -->
+  <div style="display: flex; justify-content: flex-end; margin-bottom: 15px;">
+      <button onclick="toggleTheme()" id="themeBtn" style="width: auto; padding: 8px 12px; font-size: 13px; margin: 0;">🌙 Koyu Tema</button>
+  </div>
+
+  <!-- İSTATİSTİK PANELİ -->
+  <div id="statsPanel" style="background: #1e293b; padding: 12px; border-radius: 10px; margin-bottom: 20px; font-size: 14px; color: #94a3b8; display: flex; justify-content: space-around;">
+      <span>📊 Bugün: <strong id="todayCount" style="color: #10b981;">0</strong></span>
+      <span>🏆 Toplam: <strong id="totalKnownCount" style="color: #6366f1;">0</strong></span>
+  </div>
+
+  <!-- SEVİYE SEÇİM EKRANI -->
+  <div id="levelScreen">
+    <h1 style="text-align: center; margin-bottom: 20px;">Seviyeni Seç</h1>
+    <div class="level-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+        <button onclick="selectLevel('A1')">A1 - Başlangıç</button>
+        <button onclick="selectLevel('A2')">A2 - Temel</button>
+        <button onclick="selectLevel('B1')">B1 - Orta</button>
+        <button onclick="selectLevel('B2')">B2 - Üst Orta</button>
+        <button onclick="selectLevel('C1')" style="grid-column: span 2;">C1 - İleri</button>
+    </div>
+    <button id="missedWordsBtn" onclick="studyMissedWords()" style="background: #f59e0b; margin-top: 20px; display: none;">⚠️ Zorlandığım Kelimeler</button>
+  </div>
+
+  <!-- UYGULAMA EKRANI -->
+  <div id="appScreen" style="display:none;">
+    <div style="margin-bottom: 15px;">
+        <button onclick="goToMainMenu()" style="background: transparent; border: 1px solid #475569; color: #94a3b8; padding: 6px 12px; font-size: 13px; width: auto; margin: 0; cursor: pointer;">← Menüye Dön</button>
+    </div>
+
+    <div class="progress-container" style="margin-bottom: 30px;">
+        <div class="progress-bar-bg" style="background: #1e293b; border-radius: 10px; height: 10px; width: 100%; overflow: hidden;">
+            <div id="progressBar" style="background: #10b981; width: 0%; height: 100%; transition: 0.4s;"></div>
+        </div>
+        <small id="progressText" style="color: #94a3b8; display: block; margin-top: 8px; text-align: center; font-weight: bold;">0 / 0</small>
+    </div>
+
+    <!-- KELİME ALANI -->
+    <div id="wordDisplay" style="margin: 40px 0; text-align: center;">
+        <div style="display: flex; align-items: center; justify-content: center; gap: 20px;">
+            <h2 id="word" style="margin: 0; font-size: 48px; color: #6366f1; letter-spacing: 1px;"></h2>
+            <button onclick="speakWord()" style="width: auto; background: #1e293b; padding: 12px; border-radius: 50%; margin: 0; border: none; cursor: pointer; font-size: 20px;">🔊</button>
+        </div>
+    </div>
+
+    <!-- ANA BUTONLAR -->
+    <div class="buttons" id="mainButtons" style="display: flex; gap: 15px; margin-top: 20px;">
+      <button class="btn-know" onclick="answer(true)" style="flex: 1; padding: 15px; background: #10b981; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 16px; font-weight: bold;">Biliyorum ✅</button>
+      <button class="btn-dont-know" onclick="answer(false)" style="flex: 1; padding: 15px; background: #ef4444; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 16px; font-weight: bold;">Bilmiyorum ❌</button>
+    </div>
+
+    <!-- BİLGİ KUTUSU (BİLMEDİĞİNDE AÇILIR) -->
+    <div id="infoBox" style="display:none; margin-top: 25px; background: #1e293b; padding: 25px; border-radius: 12px; border-left: 5px solid #ef4444;">
+      <h3 id="meaning" style="color: #f8fafc; font-size: 24px; margin-bottom: 12px; border-bottom: 1px solid #475569; padding-bottom: 10px;"></h3>
+      <p style="color: #94a3b8; font-size: 14px; margin-bottom: 8px;">Örnek Cümleler:</p>
+      <ul id="examples" style="text-align: left; padding-left: 20px; color: #cbd5e1; line-height: 1.6; font-style: italic;"></ul>
+      <button class="btn-next" onclick="nextWord()" style="margin-top: 20px; background: #6366f1; width: 100%; padding: 12px; border: none; border-radius: 8px; color: white; font-weight: bold; cursor: pointer;">Sıradaki Kelime →</button>
+    </div>
+  </div>
+
+  <!-- TEBRİKLER EKRANI -->
+  <div id="congratsScreen" style="display:none; padding: 50px 20px; text-align: center;">
+      <div style="font-size: 70px; margin-bottom: 20px;">🏆</div>
+      <h1 style="color: #10b981; font-size: 32px; margin-bottom: 10px;">Mükemmel!</h1>
+      <p id="congratsMessage" style="color: #cbd5e1; margin-bottom: 30px; font-size: 18px;"></p>
+      <button onclick="goToMainMenu()" style="background: #10b981; padding: 15px 30px; border: none; border-radius: 8px; color: white; font-weight: bold; cursor: pointer;">Ana Menüye Dön</button>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
